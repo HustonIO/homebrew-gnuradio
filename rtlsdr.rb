@@ -2,18 +2,17 @@ require 'formula'
 
 class Rtlsdr < Formula
   homepage 'http://sdr.osmocom.org/trac/wiki/rtl-sdr'
-  head 'git://git.osmocom.org/rtl-sdr.git'
+  head 'git.osmocom.org/rtl-sdr',
+    :shallow => false
 
   depends_on 'pkg-config' => :build
+  depends_on 'autoconf' => :build
   depends_on 'automake' => :build
   depends_on 'libtool' => :build
   depends_on 'cmake' => :build
   depends_on 'libusb'
-
-  if MacOS.xcode_version.to_f >= 4.3
-    depends_on 'autoconf'
-  end
-
+  depends_on 'autoconf'
+ 
   def install
     args = ["--prefix=#{prefix}"]
     system "autoreconf -i"
